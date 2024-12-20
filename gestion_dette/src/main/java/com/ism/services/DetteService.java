@@ -11,7 +11,7 @@ public class DetteService {
 
     private DetteRepository detteRepository;
 
-    // Constructor pour injecter le repository si nécessaire
+
     public DetteService(DetteRepository detteRepository) {
         this.detteRepository = detteRepository;
     }
@@ -29,7 +29,7 @@ public class DetteService {
                 return;
             }
 
-            // Utilisation de la méthode ajouterMontantPaiement
+
             dette.ajouterMontantPaiement(montantPaiement);
 
             if (dette.isSolde()) {
@@ -40,17 +40,17 @@ public class DetteService {
         } catch (Exception e) {
             System.out.println("Erreur lors de l'entrée du montant. Assurez-vous d'entrer un nombre valide.");
         } finally {
-            scanner.close(); // Fermeture du scanner pour éviter les fuites de ressources
+            scanner.close();
         }
     }
 
-    // Nouvelle méthode pour rechercher les dettes par statut
+
     public List<Dette> findDettesByStatut(String statut) {
         return detteRepository.findByStatut(statut);
     }
 
-    // Nouvelle méthode pour rechercher les dettes d'un client
+
     public List<Dette> findDettesByClient(Client client) {
-        return detteRepository.findByClient(client); // Appelle la méthode du dépôt
+        return detteRepository.findByClient(client);
     }
 }

@@ -13,12 +13,12 @@ public class ClientServiceImpl implements ClientService {
     
     private ClientRepository clientRepository;
 
-    // Injection de dépendance
+
     public ClientServiceImpl(ClientRepository clientRepository, Repository<User> userRepository) {
         this.clientRepository = clientRepository;
     }
 
-    // Use cases client
+
     @Override
     public void createClient(Client client) {
         clientRepository.insert(client);
@@ -49,29 +49,29 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.selectClientsWithoutUser();
     }
 
-    // Méthode ajoutée pour trouver un client par ID (point 1)
+
     @Override
     public Client findClientById(Long id) {
-        return clientRepository.findById(id); // Assurez-vous que cette méthode existe dans ClientRepository
+        return clientRepository.findById(id); 
     }
 
-    // Méthode pour rechercher les dettes d'un client (point 4)
+
     public List<Dette> findDettesByClient(Client client) {
-        return clientRepository.findDettesByClient(client); // Implémenter cette méthode dans ClientRepository si nécessaire
+        return clientRepository.findDettesByClient(client);
     }
 
-    // Méthode pour rechercher une dette par ID (point 5)
+
     public Dette findDetteById(Long id) {
-        return clientRepository.findDetteById(id); // Vérifiez également son existence dans ClientRepository
+        return clientRepository.findDetteById(id);
     }
 
-    // Méthode ajoutée pour mettre à jour un client (point 10)
+
     public void updateClient(Client client) {
-        clientRepository.update(client); // Assurez-vous que cette méthode est implémentée dans ClientRepository
+        clientRepository.update(client);
     }
     
     @Override
     public Client getClientByPhone(String phoneNumber) {
-        return clientRepository.findByPhoneNumber(phoneNumber);  // Appel à la méthode du repository
+        return clientRepository.findByPhoneNumber(phoneNumber);
     }
 }

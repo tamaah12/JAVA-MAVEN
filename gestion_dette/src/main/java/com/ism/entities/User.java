@@ -8,9 +8,9 @@ public class User {
     private String login;
     private String password;
     private boolean active;
-    private String role;  // Ajout du rôle
+    private String role;
 
-    // Constructeur avec rôle
+
     public User(String email, String login, String password, String role) {
         this.email = email;
         this.login = login;
@@ -21,10 +21,10 @@ public class User {
 
     public User() {
         this.active = true;
-        this.role = "Boutiquier";  // Valeur par défaut
+        this.role = "Boutiquier";
     }
 
-    // Getter et setter pour le rôle
+
     public String getRole() {
         return role;
     }

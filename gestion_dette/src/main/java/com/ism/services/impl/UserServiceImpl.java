@@ -12,9 +12,9 @@ import com.ism.services.UserService;
 public class UserServiceImpl implements UserService {
     
     private UserRepository userRepository;
-    private ClientRepository clientRepository; // Ajout du repository client
+    private ClientRepository clientRepository;
 
-    // Constructeur
+
     public UserServiceImpl(UserRepository userRepository, ClientRepository clientRepository) {
         this.userRepository = userRepository;
         this.clientRepository = clientRepository;
@@ -22,11 +22,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(User user) {
-        // Vérifier si l'utilisateur existe déjà par login
+
         if (userRepository.selectByLogin(user.getLogin()) != null) {
             throw new IllegalArgumentException("L'utilisateur avec ce login existe déjà.");
         }
-        // Insertion dans le repository
+
         userRepository.insert(user);
         System.out.println("Utilisateur créé : " + user.getLogin());
     }
@@ -65,13 +65,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
 public void associateUserWithClient(String login, String clientId) {
-    // Récupérer l'utilisateur par son login
+
     User user = userRepository.selectByLogin(login);
     if (user == null) {
         throw new IllegalArgumentException("L'utilisateur avec ce login n'existe pas.");
     }
 
-    // Convertir l'ID du client en Long
+
     Long clientIdAsLong;
     try {
         clientIdAsLong = Long.parseLong(clientId);
@@ -79,32 +79,32 @@ public void associateUserWithClient(String login, String clientId) {
         throw new IllegalArgumentException("L'ID du client doit être un nombre valide.");
     }
 
-    // Récupérer le client par son ID
+
     Client client = clientRepository.findById(clientIdAsLong);
     if (client == null) {
         throw new IllegalArgumentException("Aucun client trouvé avec cet ID.");
     }
 
-    // Vérifier si le client a déjà un utilisateur associé
+
     if (client.getUser() != null) {
         throw new IllegalArgumentException("Ce client a déjà un compte utilisateur.");
     }
 
-    // Associer l'utilisateur au client
+
     client.setUser(user);
-    clientRepository.update(client); // Mise à jour du client dans le repository
+    clientRepository.update(client);
     System.out.println("Compte utilisateur associé au client : " + clientId);
 }
 
 
-    // Méthode pour afficher les utilisateurs actifs
-    public List<User> findActiveUsers() {
+
+public List<User> findActiveUsers() {
         return userRepository.selectAll().stream()
                 .filter(User::isActive)
                 .collect(Collectors.toList());
     }
 
-    // Méthode pour afficher les utilisateurs par rôle (admin, boutiquier)
+
     public List<User> findUsersByRole(String role) {
         return userRepository.selectAll().stream()
                 .filter(user -> user.getRole().equalsIgnoreCase(role))

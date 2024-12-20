@@ -13,14 +13,13 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class Client {
-    private Long id; // Assurez-vous que cet attribut existe
-    private String Surname; // Nom de famille
-    private String Telephone; // Numéro de téléphone
-    private String Address; // Adresse
-    private User user; // Relation avec un utilisateur
-    private List<Dette> dettes = new ArrayList<>(); // Liste des dettes associées
+    private Long id;
+    private String Surname;
+    private String Telephone;
+    private String Address;
+    private User user;
+    private List<Dette> dettes = new ArrayList<>();
 
-    // Constructeurs
     public Client() {}
 
     public Client(String surname, String telephone, String address) {
@@ -29,15 +28,14 @@ public class Client {
         this.Address = address;
     }
 
-    // Méthode pour obtenir le nom du client (retourne Surname ici)
+    
     public String getName() {
         return Surname;
     }
 
-    // Méthode pour ajouter une dette à la liste
+    
     public void addDette(Dette dette) {
         this.dettes.add(dette);
     }
 
-    // Autres getters et setters sont gérés par Lombok
 }

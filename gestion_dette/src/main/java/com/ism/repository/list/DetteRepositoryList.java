@@ -23,7 +23,7 @@ public class DetteRepositoryList implements DetteRepository {
     @Override
     public List<Dette> selectSoldees() {
         return list.stream()
-                .filter(Dette::isSolde)  // Assurez-vous que la méthode isSolde() existe dans la classe Dette
+                .filter(Dette::isSolde)
                 .toList();
     }
 

@@ -8,17 +8,17 @@ public class Paiement {
     private LocalDate datePaiement;
     private Dette dette;
 
-    // Constructeur par défaut
+
     public Paiement() {}
 
-    // Constructeur personnalisé avec LocalDate pour la date de paiement
+
     public Paiement(Double montant, LocalDate date, Dette dette) {
         this.montant = montant;
-        this.datePaiement = date; // Utilisation directe de LocalDate
+        this.datePaiement = date;
         this.dette = dette;
     }
 
-    // Getter et Setter
+
     public Long getId() {
         return id;
     }
@@ -39,7 +39,7 @@ public class Paiement {
         return datePaiement;
     }
 
-    // Nouvelle méthode pour accepter un Date et le convertir en LocalDate
+
     public void setDatePaiement(LocalDate datePaiement) {
         if (datePaiement != null) {
             this.datePaiement = datePaiement;

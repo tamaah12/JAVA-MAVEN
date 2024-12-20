@@ -11,10 +11,10 @@ public interface ClientRepository extends Repository<Client> {
     List<Client> selectClientsWithUser();
     List<Client> selectClientsWithoutUser();
     
-    // Méthodes ajoutées :
-    Client findById(Long id);  // Trouver un client par ID
-    List<Dette> findDettesByClient(Client client);  // Trouver les dettes d'un client
-    Dette findDetteById(Long id);  // Trouver une dette par ID
-    void update(Client client);  // Mettre à jour un client
-    Client findByPhoneNumber(String phoneNumber);  // Signature de la méthode
+
+    Client findById(Long id);
+    List<Dette> findDettesByClient(Client client);
+    Dette findDetteById(Long id);
+    void update(Client client);
+    Client findByPhoneNumber(String phoneNumber);
 }

@@ -12,14 +12,14 @@ public interface ClientService {
     Client search(String telephone);
     Client searchClientBySurname(String surname);
 
-    // Méthodes existantes
+
     List<Client> findClientsWithUser();
     List<Client> findClientsWithoutUser();
 
-    // Méthodes manquantes ajoutées
-    Client findClientById(Long id);  // Trouver un client par ID
-    List<Dette> findDettesByClient(Client client);  // Trouver les dettes d'un client
-    Dette findDetteById(Long id);  // Trouver une dette par ID
-    void updateClient(Client client);  // Mettre à jour un client
-    Client getClientByPhone(String phoneNumber);  // Méthode à implémenter
+
+    Client findClientById(Long id);
+    List<Dette> findDettesByClient(Client client);
+    Dette findDetteById(Long id);
+    void updateClient(Client client);
+    Client getClientByPhone(String phoneNumber);
 }

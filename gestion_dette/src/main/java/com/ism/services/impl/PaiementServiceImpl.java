@@ -10,9 +10,9 @@ import com.ism.repository.list.DetteRepositoryList;
 
 public class PaiementServiceImpl {
 
-    private DetteRepository detteRepository = new DetteRepositoryList(); // Dépendance à l'interface
+    private DetteRepository detteRepository = new DetteRepositoryList();
 
-    // Méthode pour enregistrer un paiement sur une dette
+
     public void enregistrerPaiement(Double montantPaiement, Long detteId) {
         Dette dette = findDetteById(detteId);
         if (dette == null) {
@@ -25,13 +25,13 @@ public class PaiementServiceImpl {
             System.out.print("Entrez le montant du paiement : ");
             montantPaiement = scanner.nextDouble();
 
-            // Créer un nouvel objet Paiement en utilisant le constructeur avec LocalDate
-            LocalDate localDatePaiement = LocalDate.now(); // Utilisation de LocalDate
-            Paiement paiement = new Paiement(montantPaiement, localDatePaiement, dette); // Utilisation du constructeur avec LocalDate
 
-            // Ajouter le paiement à la dette
+            LocalDate localDatePaiement = LocalDate.now();
+            Paiement paiement = new Paiement(montantPaiement, localDatePaiement, dette);
+
+
             dette.ajouterPaiement(paiement);
-            updateDette(dette); // Mise à jour de la dette dans le repository
+            updateDette(dette);
 
             if (dette.isSolde()) {
                 System.out.println("La dette est maintenant soldée.");
@@ -43,16 +43,16 @@ public class PaiementServiceImpl {
         }
     }
 
-    // Méthode pour rechercher une dette par ID
+
     public Dette findDetteById(Long id) {
         return detteRepository.selectAll().stream()
             .filter(dette -> dette.getId().equals(id))
             .findFirst()
-            .orElse(null); // Retourne null si aucune dette n'est trouvée
+            .orElse(null);
     }
 
-    // Méthode pour mettre à jour une dette
+
     public void updateDette(Dette dette) {
-        detteRepository.update(dette); // Utilise update pour la mise à jour
+        detteRepository.update(dette);
     }
 }

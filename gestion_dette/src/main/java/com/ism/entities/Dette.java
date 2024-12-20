@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dette {
-    // Constantes pour les statuts
+    
     public static final String STATUT_NON_SOLDE = "Non soldée";
     public static final String STATUT_SOLDE = "Soldée";
 
-    // Attributs
+    
     private Long id;
     private Double montant;
     private Double montantVerse;
@@ -19,15 +19,15 @@ public class Dette {
     private Client client;
     private List<Paiement> paiements;
 
-    // Constructeur par défaut
+    
     public Dette() {
-        this.montantVerse = 0.0; // Initialisation du montant versé à zéro
-        this.statut = STATUT_NON_SOLDE; // Statut par défaut
-        this.dateCreation = LocalDate.now(); // Date de création initialisée à aujourd'hui
-        this.paiements = new ArrayList<>(); // Initialisation de la liste des paiements
+        this.montantVerse = 0.0;
+        this.statut = STATUT_NON_SOLDE;
+        this.dateCreation = LocalDate.now();
+        this.paiements = new ArrayList<>();
     }
 
-    // Getters et Setters
+    
     public Long getId() {
         return id;
     }
@@ -50,7 +50,7 @@ public class Dette {
 
     public void setMontantVerse(Double montantVerse) {
         this.montantVerse = montantVerse;
-        verifierStatut(); // Vérification du statut après mise à jour
+        verifierStatut();
     }
 
     public LocalDate getDateCreation() {
@@ -93,49 +93,49 @@ public class Dette {
         this.paiements = paiements;
     }
 
-    // Méthode pour ajouter un paiement (Paiement en objet)
+    
     public void ajouterPaiement(Paiement paiement) {
         if (paiement == null || paiement.getMontant() <= 0) {
             throw new IllegalArgumentException("Le paiement doit être valide avec un montant positif.");
         }
         paiements.add(paiement);
-        montantVerse += paiement.getMontant(); // Mise à jour du montant versé
-        verifierStatut(); // Vérification du statut après ajout
+        montantVerse += paiement.getMontant();
+        verifierStatut();
     }
 
-    // Méthode pour solder la dette
+    
     public void solder() {
-        this.statut = STATUT_SOLDE; // Mise à jour du statut
-        this.datePaiement = LocalDate.now(); // Enregistrement de la date de paiement
+        this.statut = STATUT_SOLDE;
+        this.datePaiement = LocalDate.now();
     }
 
-    // Vérification si la dette est soldée
+    
     public boolean isSolde() {
         return montantVerse >= montant;
     }
 
-    // Méthode pour vérifier et mettre à jour le statut de la dette
+    
     private void verifierStatut() {
         if (isSolde()) {
             solder();
         } else {
-            this.statut = STATUT_NON_SOLDE; // Maintenir le statut si non soldée
+            this.statut = STATUT_NON_SOLDE;
         }
     }
 
-    // Méthode pour ajouter un paiement avec un montant directement
+    
     public void ajouterMontantPaiement(Double montantPaiement) {
         if (montantPaiement == null || montantPaiement <= 0) {
             throw new IllegalArgumentException("Le montant du paiement doit être positif.");
         }
-        // Créer un objet Paiement pour garder un historique
+        
         Paiement paiement = new Paiement();
         paiement.setMontant(montantPaiement);
         paiement.setDatePaiement(LocalDate.now());
         paiement.setDette(this);
 
-        paiements.add(paiement); // Ajouter le paiement à la liste
-        this.montantVerse += montantPaiement; // Mettre à jour le montant versé
-        verifierStatut(); // Vérifier et mettre à jour le statut
+        paiements.add(paiement);
+        this.montantVerse += montantPaiement;
+        verifierStatut();
     }
 }

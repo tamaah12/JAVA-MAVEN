@@ -104,52 +104,52 @@ public class Main {
                     break;
 
                 case 5:
-                    // Lister tous les utilisateurs
-                    List<User> users = userService.findAllUser();
+
+                List<User> users = userService.findAllUser();
                     if (users.isEmpty()) {
                         System.out.println("Aucun utilisateur trouvé.");
                     } else {
-                        users.forEach(u -> System.out.println(u.getLogin())); // Changement ici
+                        users.forEach(u -> System.out.println(u.getLogin()));
                         }
                         break;
                 case 6:
-                // Lister les clients avec un compte utilisateur
+
                 List<Client> clientsWithUser = clientService.findClientsWithUser();
                 if (clientsWithUser.isEmpty()) {
                         System.out.println("Aucun client avec un compte utilisateur trouvé.");
                     } else {
-                        clientsWithUser.forEach(c -> System.out.println(c.getSurname() + " : " + c.getUser().getLogin())); // Changement ici
+                        clientsWithUser.forEach(c -> System.out.println(c.getSurname() + " : " + c.getUser().getLogin()));
                         }
                         break;
 
                 
 
-                case 7: // Lister les clients sans compte utilisateur
+                case 7:
                     List<Client> clientsSansCompte = clientServiceImpl.findClientsWithoutUser();
                     clientsSansCompte.forEach(System.out::println);
                     break;
 
-                case 8: // Créer un article
-                    article = new Article(); // Utiliser le constructeur par défaut
+                case 8:
+                    article = new Article();
                     System.out.println("Entrer le libelle de l'article : ");
-                    article.setLibelle(scanner.nextLine()); // Utiliser setLibelle
+                    article.setLibelle(scanner.nextLine());
                     System.out.println("Entrer la reference de l'article : ");
-                    article.setReference(scanner.nextDouble()); // Utiliser setReference
-                    scanner.nextLine(); // Consommer le reste de la ligne
+                    article.setReference(scanner.nextDouble());
+                    scanner.nextLine();
                     System.out.println("Entrer la quantité en stock : ");
-                    article.setQuantiteEnStock(scanner.nextInt()); // Utiliser setQuantiteEnStock
-                    scanner.nextLine(); // Consommer le reste de la ligne
+                    article.setQuantiteEnStock(scanner.nextInt());
+                    scanner.nextLine();
                     System.out.println("Entrer la description de l'article : ");
-                    article.setDescription(scanner.nextLine()); // Utiliser setDescription
+                    article.setDescription(scanner.nextLine());
                     articlesServiceImpl.createArticle(article);
                     break;
 
-                case 9: // Lister les articles disponibles
-                    List<Article> availableArticles = articlesServiceImpl.filterAvailableArticles(); // Déclarer une seule fois
+                case 9:
+                    List<Article> availableArticles = articlesServiceImpl.filterAvailableArticles();
                     availableArticles.forEach(System.out::println);
                     break;
 
-                case 10: // Mettre à jour le stock d'un article
+                case 10:
                     System.out.println("Entrer le libelle de l'article à mettre à jour : ");
                     String articleLibelle = scanner.nextLine();
                     System.out.println("Entrer la nouvelle quantité : ");
@@ -210,14 +210,14 @@ public class Main {
                                 Double montantPaiement = scanner.nextDouble();
                                 scanner.nextLine();
 
-                                // Créer un objet Paiement
+
                                 Paiement paiement = new Paiement(montantPaiement, LocalDate.now(), dette);
 
-                                // Ajouter le paiement à la dette
+
                                 dette.ajouterPaiement(paiement);
 
-                                // Mise à jour de la dette
-                                detteServiceImpl.updateDette(dette); 
+
+                                detteServiceImpl.updateDette(dette);
 
                                 if (dette.isSolde()) {
                                     System.out.println("Dette entièrement soldée.");
